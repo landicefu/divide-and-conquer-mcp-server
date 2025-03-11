@@ -265,6 +265,55 @@ When conducting research and analysis, agents can:
 - Document sources and resources
 - Organize findings in a structured way
 
+## JSON Structure
+
+The server uses the following JSON structure to store task information:
+
+```json
+{
+  "task_description": "A medium-level detailed description about the whole task. The final goal we want to achieve.",
+  
+  "checklist": [
+    {
+      "done": false,
+      "task": "A short yet comprehensive name for the task",
+      "detailed_description": "A longer description about what we want to achieve with this task",
+      "context_and_plan": "Related information, files the agent should read, and more details from other tasks, as well as a detailed plan for this task. This is typically the longest string."
+    }
+  ],
+  
+  "context_for_all_tasks": "Information that all tasks in the checklist should include.",
+  
+  "metadata": {
+    "created_at": "ISO timestamp",
+    "updated_at": "ISO timestamp",
+    "progress": {
+      "completed": 0,
+      "total": 1,
+      "percentage": 0
+    },
+    "tags": ["tag1", "tag2"],
+    "priority": "high|medium|low",
+    "estimated_completion_time": "ISO timestamp or duration"
+  },
+  
+  "notes": [
+    {
+      "timestamp": "ISO timestamp",
+      "content": "Additional notes or observations about the overall task"
+    }
+  ],
+  
+  "resources": [
+    {
+      "name": "Resource name",
+      "url": "URL or file path",
+      "description": "Description of the resource"
+    }
+  ]
+}
+```
+
 ## Configuration Storage
 
 By default, the Divide and Conquer MCP Server stores task data in the following location:
