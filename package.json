@@ -1,0 +1,50 @@
+{
+  "name": "@landicefu/divide-and-conquer-mcp-server",
+  "version": "1.0.0",
+  "description": "An MCP server for breaking down complex tasks into manageable pieces with structured JSON storage",
+  "main": "build/index.js",
+  "type": "module",
+  "bin": {
+    "divide-and-conquer-mcp-server": "build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "start": "node build/index.js",
+    "dev": "tsc -w",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "task-management",
+    "divide-and-conquer",
+    "ai-tools"
+  ],
+  "author": "Landice Fu",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.0",
+    "fs-extra": "^11.1.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.1",
+    "@types/node": "^20.4.5",
+    "typescript": "^5.1.6"
+  },
+  "files": [
+    "build",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/landicefu/divide-and-conquer-mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/landicefu/divide-and-conquer-mcp-server/issues"
+  },
+  "homepage": "https://github.com/landicefu/divide-and-conquer-mcp-server#readme"
+}
