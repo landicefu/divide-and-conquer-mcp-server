@@ -418,7 +418,7 @@ Clears the current task data.
 
 ### `get_checklist_summary`
 
-Returns a summary of the checklist with completion status.
+Returns a summary of the checklist with completion status. Context information is intentionally excluded from the summary to save context window space.
 
 ```json
 {
@@ -541,7 +541,7 @@ const summary = await use_mcp_tool({
   }
 });
 
-// Result contains a formatted summary of the checklist with completion status
+// Result contains a formatted summary of the checklist with completion status (context is excluded to save space)
 ```
 
 ## Benefits for Complex Tasks

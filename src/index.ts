@@ -1167,9 +1167,7 @@ class DivideAndConquerServer {
             summary += `   - Description: ${item.detailed_description.replace(/\n/g, '\n     ')}\n`;
           }
           
-          if (item.context) {
-            summary += `   - Context: ${item.context.replace(/\n/g, '\n     ')}\n`;
-          }
+          // Context is intentionally excluded from summary to save context window space
         }
       });
       
