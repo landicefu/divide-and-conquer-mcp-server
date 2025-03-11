@@ -173,15 +173,6 @@ class DivideAndConquerServer {
           }
         },
         {
-          name: 'get_task',
-          description: 'Retrieves the current task information.',
-          inputSchema: {
-            type: 'object',
-            properties: {},
-            required: []
-          }
-        },
-        {
           name: 'update_task_description',
           description: 'Updates the main task description.',
           inputSchema: {
@@ -432,8 +423,6 @@ class DivideAndConquerServer {
         switch (request.params.name) {
           case 'initialize_task':
             return await this.initializeTask(request.params.arguments);
-          case 'get_task':
-            return await this.getTask();
           case 'update_task_description':
             return await this.updateTaskDescription(request.params.arguments);
           case 'update_context':
@@ -603,33 +592,6 @@ class DivideAndConquerServer {
           {
             type: 'text',
             text: `Error initializing task: ${error instanceof Error ? error.message : String(error)}`,
-          },
-        ],
-        isError: true,
-      };
-    }
-  }
-
-  // Get the current task
-  private async getTask(): Promise<any> {
-    try {
-      const taskData = await this.readTaskData();
-      
-      return {
-        content: [
-          {
-            type: 'text',
-            text: JSON.stringify(taskData, null, 2),
-          },
-        ],
-      };
-    } catch (error) {
-      console.error('Error getting task:', error);
-      return {
-        content: [
-          {
-            type: 'text',
-            text: `Error getting task: ${error instanceof Error ? error.message : String(error)}`,
           },
         ],
         isError: true,

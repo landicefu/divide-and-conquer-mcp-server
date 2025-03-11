@@ -125,10 +125,6 @@ The Divide and Conquer MCP Server provides the following tools:
 
 Creates a new task with the specified description and optional initial checklist items.
 
-### `get_task`
-
-Retrieves the current task information.
-
 ### `update_task_description`
 
 Updates the main task description.
