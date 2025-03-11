@@ -32,7 +32,7 @@ interface ChecklistItem {
   done: boolean;
   task: string;
   detailed_description: string;
-  context?: string;
+  context_and_plan?: string;
 }
 
 interface TaskMetadata {
@@ -133,9 +133,9 @@ class DivideAndConquerServer {
                       type: 'string',
                       description: 'A longer description about what we want to achieve with this task'
                     },
-                    context: {
+                    context_and_plan: {
                       type: 'string',
-                      description: 'Related information, files the agent should read, and more details from other tasks'
+                      description: 'Related information, files the agent should read, and more details from other tasks, as well as a detailed plan for this task'
                     },
                     done: {
                       type: 'boolean',
@@ -223,9 +223,9 @@ class DivideAndConquerServer {
                 type: 'string',
                 description: 'A longer description about what we want to achieve with this task'
               },
-              context: {
+              context_and_plan: {
                 type: 'string',
-                description: 'Related information, files the agent should read, and more details from other tasks'
+                description: 'Related information, files the agent should read, and more details from other tasks, as well as a detailed plan for this task'
               },
               done: {
                 type: 'boolean',
@@ -258,9 +258,9 @@ class DivideAndConquerServer {
                 type: 'string',
                 description: 'A longer description about what we want to achieve with this task'
               },
-              context: {
+              context_and_plan: {
                 type: 'string',
-                description: 'Related information, files the agent should read, and more details from other tasks'
+                description: 'Related information, files the agent should read, and more details from other tasks, as well as a detailed plan for this task'
               },
               done: {
                 type: 'boolean',
@@ -724,7 +724,7 @@ class DivideAndConquerServer {
       const newItem: ChecklistItem = {
         task: args.task,
         detailed_description: args.detailed_description,
-        context: args.context,
+        context_and_plan: args.context_and_plan,
         done: args.done || false
       };
       
@@ -783,8 +783,8 @@ class DivideAndConquerServer {
         taskData.checklist[args.index].detailed_description = args.detailed_description;
       }
       
-      if (args.context !== undefined) {
-        taskData.checklist[args.index].context = args.context;
+      if (args.context_and_plan !== undefined) {
+        taskData.checklist[args.index].context_and_plan = args.context_and_plan;
       }
       
       if (args.done !== undefined) {
@@ -1169,8 +1169,8 @@ class DivideAndConquerServer {
             is_current: true
           };
         } else {
-          // For other tasks, exclude context
-          const { context, ...taskWithoutContext } = item;
+          // For other tasks, exclude context_and_plan to save context window space
+          const { context_and_plan, ...taskWithoutContext } = item;
           return {
             index,
             ...taskWithoutContext,
