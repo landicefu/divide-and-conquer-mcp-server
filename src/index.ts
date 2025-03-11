@@ -81,7 +81,7 @@ class DivideAndConquerServer {
     this.server = new Server(
       {
         name: 'divide-and-conquer-server',
-        version: '1.0.0',
+        version: '1.1.0',
       },
       {
         capabilities: {
@@ -413,6 +413,15 @@ class DivideAndConquerServer {
               }
             }
           }
+        },
+        {
+          name: 'get_current_task_details',
+          description: 'Retrieves details of the current task (first uncompleted task) with full context. This is the recommended tool to use when working with tasks.',
+          inputSchema: {
+            type: 'object',
+            properties: {},
+            required: []
+          }
         }
       ],
     }));
@@ -451,6 +460,8 @@ class DivideAndConquerServer {
             return await this.clearTask();
           case 'get_checklist_summary':
             return await this.getChecklistSummary(request.params.arguments);
+          case 'get_current_task_details':
+            return await this.getCurrentTaskDetails();
           default:
             throw new McpError(
               ErrorCode.MethodNotFound,
@@ -1133,6 +1144,71 @@ class DivideAndConquerServer {
           {
             type: 'text',
             text: `Error clearing task: ${error instanceof Error ? error.message : String(error)}`,
+          },
+        ],
+        isError: true,
+      };
+    }
+  }
+
+  // Get details of the current task (first uncompleted task) and all other tasks with limited fields
+  private async getCurrentTaskDetails(): Promise<any> {
+    try {
+      const taskData = await this.readTaskData();
+      
+      // Find the first uncompleted task
+      const currentTaskIndex = taskData.checklist.findIndex(item => !item.done);
+      
+      // Process all tasks with different detail levels
+      const tasks = taskData.checklist.map((item, index) => {
+        if (index === currentTaskIndex) {
+          // For the current task (first uncompleted), include all fields
+          return {
+            index,
+            ...item,
+            is_current: true
+          };
+        } else {
+          // For other tasks, exclude context
+          const { context, ...taskWithoutContext } = item;
+          return {
+            index,
+            ...taskWithoutContext,
+            is_current: false
+          };
+        }
+      });
+      
+      // Format the response
+      let response = {
+        ultimate_goal: {
+          description: taskData.task_description,
+          note: "This is the final goal of the entire task, not just the current step."
+        },
+        current_task_index: currentTaskIndex,
+        tasks: tasks,
+        context_for_all_tasks: taskData.context_for_all_tasks || "",
+        progress: taskData.metadata.progress,
+        metadata: taskData.metadata,
+        notes: taskData.notes || [],
+        resources: taskData.resources || []
+      };
+      
+      return {
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(response, null, 2),
+          },
+        ],
+      };
+    } catch (error) {
+      console.error('Error getting current task details:', error);
+      return {
+        content: [
+          {
+            type: 'text',
+            text: `Error getting current task details: ${error instanceof Error ? error.message : String(error)}`,
           },
         ],
         isError: true,

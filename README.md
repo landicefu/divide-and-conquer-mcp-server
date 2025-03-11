@@ -166,6 +166,10 @@ Clears the current task data.
 
 Returns a summary of the checklist with completion status. Context information is intentionally excluded from the summary to save context window space.
 
+### `get_current_task_details`
+
+Retrieves details of the current task (first uncompleted task) with full context, along with all other tasks with limited fields. For the current task, all fields including context are included. For other tasks, only task, detailed_description, and done status are included (context is excluded). This is the recommended tool to use when working with tasks.
+
 ## Usage Examples
 
 ### Initializing a Complex Task
@@ -210,6 +214,23 @@ const summary = await use_mcp_tool({
 });
 
 // Result contains a formatted summary of the checklist with completion status (context is excluded to save space)
+```
+
+### Getting Current Task Details
+
+```javascript
+const taskDetails = await use_mcp_tool({
+  server_name: "divide-and-conquer",
+  tool_name: "get_current_task_details",
+  arguments: {}
+});
+
+// Result contains:
+// - ultimate_goal: The final goal of the entire task (task_description)
+// - tasks: Array of all tasks, where the current task (first uncompleted) has all fields including context,
+//   while other tasks have limited fields (task, detailed_description, done) without context
+// - current_task_index: Index of the current task (first uncompleted)
+// - Additional task metadata, notes, resources, etc.
 ```
 
 ## Use Cases
