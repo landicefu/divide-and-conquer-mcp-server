@@ -37,8 +37,8 @@ The Divide and Conquer MCP Server is an evolution of the Temp Notes MCP Server, 
    {
      "mcpServers": {
        "divide-and-conquer": {
-         "command": "node",
-         "args": ["/path/to/divide-and-conquer-mcp-server/build/index.js"],
+         "command": "npx",
+         "args": ["-y", "@landicefu/divide-and-conquer-mcp-server"],
          "disabled": false
        }
      }
@@ -71,7 +71,22 @@ The Divide and Conquer MCP Server is an evolution of the Temp Notes MCP Server, 
 
 ## Installation
 
-### Option 1: Install from source
+### Option 1: Using npx (Recommended)
+
+Add the server to your MCP configuration:
+```json
+{
+  "mcpServers": {
+    "divide-and-conquer": {
+      "command": "npx",
+      "args": ["-y", "@landicefu/divide-and-conquer-mcp-server"],
+      "disabled": false
+    }
+  }
+}
+```
+
+### Option 2: Install from source
 
 1. Clone the repository:
    ```bash
