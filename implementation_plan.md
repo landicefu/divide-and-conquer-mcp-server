@@ -26,7 +26,7 @@ The server will use the following JSON structure to store task information:
       "done": false,
       "task": "A short yet comprehensive name for the task",
       "detailed_description": "A longer description about what we want to achieve with this task",
-      "context": "Related information, files the agent should read, and more details from other tasks. This is typically the longest string."
+      "context_and_plan": "Related information, files the agent should read, and more details from other tasks, as well as a detailed plan for this task. This is typically the longest string."
     }
   ],
   
@@ -109,9 +109,9 @@ Creates a new task with the specified description and optional initial checklist
             "type": "string",
             "description": "A longer description about what we want to achieve with this task"
           },
-          "context": {
+          "context_and_plan": {
             "type": "string",
-            "description": "Related information, files the agent should read, and more details from other tasks"
+            "description": "Related information, files the agent should read, and more details from other tasks, as well as a detailed plan for this task"
           },
           "done": {
             "type": "boolean",
@@ -211,9 +211,9 @@ Adds a new item to the checklist.
       "type": "string",
       "description": "A longer description about what we want to achieve with this task"
     },
-    "context": {
+    "context_and_plan": {
       "type": "string",
-      "description": "Related information, files the agent should read, and more details from other tasks"
+      "description": "Related information, files the agent should read, and more details from other tasks, as well as a detailed plan for this task"
     },
     "done": {
       "type": "boolean",
@@ -249,9 +249,9 @@ Updates an existing checklist item.
       "type": "string",
       "description": "A longer description about what we want to achieve with this task"
     },
-    "context": {
+    "context_and_plan": {
       "type": "string",
-      "description": "Related information, files the agent should read, and more details from other tasks"
+      "description": "Related information, files the agent should read, and more details from other tasks, as well as a detailed plan for this task"
     },
     "done": {
       "type": "boolean",
@@ -435,7 +435,7 @@ Returns a summary of the checklist with completion status. Context information i
 
 ### `get_current_task_details`
 
-Retrieves details of the current task (first uncompleted task) with full context, along with all other tasks with limited fields. For the current task, all fields including context are included. For other tasks, only task, detailed_description, and done status are included (context is excluded). This is the recommended tool to use when working with tasks.
+Retrieves details of the current task (first uncompleted task) with full context, along with all other tasks with limited fields. For the current task, all fields including context_and_plan are included. For other tasks, only task, detailed_description, and done status are included (context_and_plan is excluded). This is the recommended tool to use when working with tasks.
 
 ```json
 {
@@ -482,17 +482,17 @@ await use_mcp_tool({
       {
         task: "Analyze current authentication flow",
         detailed_description: "Review the existing authentication code to understand the current flow.",
-        context: "Look at src/auth/* files. The current implementation uses express-session with MongoDB store. Pay special attention to session expiration handling."
+        context_and_plan: "Look at src/auth/* files. The current implementation uses express-session with MongoDB store. Pay special attention to session expiration handling."
       },
       {
         task: "Design JWT implementation",
         detailed_description: "Create a design document outlining how JWT will be implemented.",
-        context: "Consider token structure, storage, and refresh mechanisms. Research best practices for JWT implementation in Node.js applications. Reference the security requirements document in docs/security.md."
+        context_and_plan: "Consider token structure, storage, and refresh mechanisms. Research best practices for JWT implementation in Node.js applications. Reference the security requirements document in docs/security.md."
       },
       {
         task: "Implement JWT authentication backend",
         detailed_description: "Modify the backend to generate and validate JWT tokens.",
-        context: "Use the jsonwebtoken library. Implement in src/auth/jwt.js. Make sure to handle token refresh and revocation. Update the login and authentication middleware."
+        context_and_plan: "Use the jsonwebtoken library. Implement in src/auth/jwt.js. Make sure to handle token refresh and revocation. Update the login and authentication middleware."
       }
     ],
     metadata: {
@@ -567,8 +567,8 @@ const taskDetails = await use_mcp_tool({
 
 // Result contains:
 // - ultimate_goal: The final goal of the entire task (task_description)
-// - tasks: Array of all tasks, where the current task (first uncompleted) has all fields including context,
-//   while other tasks have limited fields (task, detailed_description, done) without context
+// - tasks: Array of all tasks, where the current task (first uncompleted) has all fields including context_and_plan,
+//   while other tasks have limited fields (task, detailed_description, done) without context_and_plan
 // - current_task_index: Index of the current task (first uncompleted)
 // - Additional task metadata, notes, resources, etc.
 ```

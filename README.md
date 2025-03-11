@@ -64,7 +64,7 @@ The Divide and Conquer MCP Server is an evolution of the Temp Notes MCP Server, 
      arguments: {
        task: "Analyze current authentication flow",
        detailed_description: "Review the existing authentication code.",
-       context: "Look at src/auth/* files. The current implementation uses express-session with MongoDB store."
+       context_and_plan: "Look at src/auth/* files. The current implementation uses express-session with MongoDB store."
      }
    });
    ```
@@ -168,7 +168,7 @@ Returns a summary of the checklist with completion status. Context information i
 
 ### `get_current_task_details`
 
-Retrieves details of the current task (first uncompleted task) with full context, along with all other tasks with limited fields. For the current task, all fields including context are included. For other tasks, only task, detailed_description, and done status are included (context is excluded). This is the recommended tool to use when working with tasks.
+Retrieves details of the current task (first uncompleted task) with full context, along with all other tasks with limited fields. For the current task, all fields including context_and_plan are included. For other tasks, only task, detailed_description, and done status are included (context_and_plan is excluded). This is the recommended tool to use when working with tasks.
 
 ## Usage Examples
 
@@ -185,12 +185,12 @@ await use_mcp_tool({
       {
         task: "Analyze current authentication flow",
         detailed_description: "Review the existing authentication code to understand the current flow.",
-        context: "Look at src/auth/* files. The current implementation uses express-session with MongoDB store. Pay special attention to session expiration handling."
+        context_and_plan: "Look at src/auth/* files. The current implementation uses express-session with MongoDB store. Pay special attention to session expiration handling."
       },
       {
         task: "Design JWT implementation",
         detailed_description: "Create a design document outlining how JWT will be implemented.",
-        context: "Consider token structure, storage, and refresh mechanisms. Research best practices for JWT implementation in Node.js applications. Reference the security requirements document in docs/security.md."
+        context_and_plan: "Consider token structure, storage, and refresh mechanisms. Research best practices for JWT implementation in Node.js applications. Reference the security requirements document in docs/security.md."
       }
     ],
     metadata: {
@@ -227,8 +227,8 @@ const taskDetails = await use_mcp_tool({
 
 // Result contains:
 // - ultimate_goal: The final goal of the entire task (task_description)
-// - tasks: Array of all tasks, where the current task (first uncompleted) has all fields including context,
-//   while other tasks have limited fields (task, detailed_description, done) without context
+// - tasks: Array of all tasks, where the current task (first uncompleted) has all fields including context_and_plan,
+//   while other tasks have limited fields (task, detailed_description, done) without context_and_plan
 // - current_task_index: Index of the current task (first uncompleted)
 // - Additional task metadata, notes, resources, etc.
 ```
