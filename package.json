@@ -8,9 +8,11 @@
     "divide-and-conquer-mcp-server": "build/index.js"
   },
   "scripts": {
+    "prepare": "npm run build",
     "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
     "start": "node build/index.js",
     "dev": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -46,5 +48,8 @@
   "bugs": {
     "url": "https://github.com/landicefu/divide-and-conquer-mcp-server/issues"
   },
-  "homepage": "https://github.com/landicefu/divide-and-conquer-mcp-server#readme"
+  "homepage": "https://github.com/landicefu/divide-and-conquer-mcp-server#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
