@@ -1,6 +1,6 @@
 {
   "name": "@landicefu/divide-and-conquer-mcp-server",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An MCP server for breaking down complex tasks into manageable pieces with structured JSON storage",
   "main": "build/index.js",
   "type": "module",
