@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/landicefu-divide-and-conquer-mcp-server-badge.png)](https://mseep.ai/app/landicefu-divide-and-conquer-mcp-server)
+
 # Divide and Conquer MCP Server
 
 A Model Context Protocol (MCP) server that enables AI agents to break down complex tasks into manageable pieces using a structured JSON format.
