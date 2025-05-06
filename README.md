@@ -1,4 +1,5 @@
 # Divide and Conquer MCP Server
+[![smithery badge](https://smithery.ai/badge/@landicefu/divide-and-conquer-mcp-server)](https://smithery.ai/server/@landicefu/divide-and-conquer-mcp-server)
 
 A Model Context Protocol (MCP) server that enables AI agents to break down complex tasks into manageable pieces using a structured JSON format.
 
@@ -70,6 +71,14 @@ The Divide and Conquer MCP Server is an evolution of the Temp Notes MCP Server, 
    ```
 
 ## Installation
+
+### Installing via Smithery
+
+To install Divide and Conquer Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@landicefu/divide-and-conquer-mcp-server):
+
+```bash
+npx -y @smithery/cli install @landicefu/divide-and-conquer-mcp-server --client claude
+```
 
 ### Option 1: Using npx (Recommended)
 
