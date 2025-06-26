@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/landicefu-divide-and-conquer-mcp-server-badge.png)](https://mseep.ai/app/landicefu-divide-and-conquer-mcp-server)
+
 # Divide and Conquer MCP Server
 [![smithery badge](https://smithery.ai/badge/@landicefu/divide-and-conquer-mcp-server)](https://smithery.ai/server/@landicefu/divide-and-conquer-mcp-server)
 
