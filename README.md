@@ -5,6 +5,10 @@
 
 A Model Context Protocol (MCP) server that enables AI agents to break down complex tasks into manageable pieces using a structured JSON format.
 
+<a href="https://glama.ai/mcp/servers/@landicefu/divide-and-conquer-mcp-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@landicefu/divide-and-conquer-mcp-server/badge" alt="Divide and Conquer Server MCP server" />
+</a>
+
 ## Table of Contents
 
 - [Purpose](#purpose)
